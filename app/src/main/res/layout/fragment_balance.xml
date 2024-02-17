@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#B3CDF4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".application.BalanceFragment">
+
+    <!--    main screen-->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3972C8"
+        android:contentDescription="balance, strategies and stocks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="hint1"
+                    android:text="balance"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/option2"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="hint2"
+                    android:text="strategies"
+                    app:layout_constraintEnd_toStartOf="@id/option1"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <ImageView
+        android:id="@+id/imageview_circle"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ellipse"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageview_arrow"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/arrow"
+        app:layout_constraintBottom_toTopOf="@id/textview_second"
+        app:layout_constraintEnd_toEndOf="@id/textview_first"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@id/imageview_circle"
+        app:layout_constraintTop_toTopOf="@id/imageview_circle" />
+
+    <TextView
+        android:id="@+id/textview_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="2.5%"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@id/textview_second"
+        app:layout_constraintEnd_toEndOf="@id/imageview_circle"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@id/imageview_circle"
+        app:layout_constraintTop_toTopOf="@id/imageview_circle" />
+
+    <TextView
+        android:id="@+id/textview_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="1025$"
+        android:textColor="@android:color/black"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_circle"
+        app:layout_constraintEnd_toEndOf="@id/imageview_circle"
+        app:layout_constraintStart_toStartOf="@id/imageview_circle"
+        app:layout_constraintTop_toBottomOf="@id/textview_first" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
