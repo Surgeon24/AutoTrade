@@ -8,34 +8,60 @@
     tools:context=".application.BalanceFragment">
 
 <!--        main screen-->
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/menu"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#3972C8"-->
+<!--        android:contentDescription="balance, strategies and stocks"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:id="@+id/option1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/balance"-->
+<!--                    app:layout_constraintEnd_toStartOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/option2"/>-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:id="@+id/option2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/strategies"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/option1"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"/>-->
+
+<!--    </com.google.android.material.tabs.TabLayout>-->
+
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3972C8"
-        android:contentDescription="balance, strategies and stocks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/option1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="hint1"
-                    android:text="balance"
-                    app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/option2"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/wallet"
+            android:text="tab1" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/option2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="hint2"
-                    android:text="strategies"
-                    app:layout_constraintEnd_toStartOf="@id/option1"
-                    app:layout_constraintStart_toStartOf="parent"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab2"
+            android:icon="@drawable/wallet"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab3"
+            android:icon="@drawable/investor"
+            />
 
     </com.google.android.material.tabs.TabLayout>
 
