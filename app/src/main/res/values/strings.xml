@@ -36,4 +36,6 @@
     <!-- Strings related to main activity -->
     <string name="balance">balance</string>
     <string name="strategies">strategies</string>
+    <string name="stocks">stocks</string>
+
 </resources>

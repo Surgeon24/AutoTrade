@@ -1,4 +1,4 @@
-package m.ermolaev.autotradeapp.data
+package m.ermolaev.autotradeapp.loginData
 
 import java.io.IOException
 

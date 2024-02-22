@@ -1,4 +1,4 @@
-package m.ermolaev.autotradeapp.data
+package m.ermolaev.autotradeapp.loginData
 
 /**
  * A generic class that holds a value with its loading status.

@@ -2,8 +2,8 @@ package m.ermolaev.autotradeapp.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import m.ermolaev.autotradeapp.data.LoginDataSource
-import m.ermolaev.autotradeapp.data.LoginRepository
+import m.ermolaev.autotradeapp.loginData.LoginDataSource
+import m.ermolaev.autotradeapp.loginData.LoginRepository
 
 class LoginViewModelFactory : ViewModelProvider.Factory {
 

@@ -1,6 +1,4 @@
-package m.ermolaev.autotradeapp.data
-
-import m.ermolaev.autotradeapp.data.LoginDataSource
+package m.ermolaev.autotradeapp.loginData
 
 /**
  * Class that requests authentication and user information from the remote data source and

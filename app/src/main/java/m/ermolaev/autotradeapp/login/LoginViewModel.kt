@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
 
-import m.ermolaev.autotradeapp.data.Result
+import m.ermolaev.autotradeapp.loginData.Result
 import m.ermolaev.autotradeapp.R
-import m.ermolaev.autotradeapp.data.LoginRepository
+import m.ermolaev.autotradeapp.loginData.LoginRepository
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
