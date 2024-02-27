@@ -13,7 +13,7 @@ import m.ermolaev.autotradeapp.R
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class StockFragment : Fragment() {
+class StockFragment : Fragment(), OnTradeClickListener {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -24,6 +24,7 @@ class StockFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,13 +32,12 @@ class StockFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_stock, container, false)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        val dataList = ArrayList<StrategyData>()
-        dataList.add(StrategyData("Stock 1", "Description of the Stock 1"))
-        dataList.add(StrategyData("Stock 2", "Description of the Stock 2"))
-        dataList.add(StrategyData("Stock 3", "Description of the Stock 3"))
+        val dataList = ArrayList<StockData>()
+        dataList.add(StockData("Stock 1", "Description of the Stock 1", "120"))
+        dataList.add(StockData("Stock 2", "Description of the Stock 2", "240"))
+        dataList.add(StockData("Stock 3", "Description of the Stock 3", "90"))
 
-
-        val adapter = StrategyListAdapter(dataList)
+        val adapter = StockListAdapter(dataList, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -51,13 +51,22 @@ class StockFragment : Fragment() {
                     2 -> onStockButtonClicked()
                 }
             }
-            override fun onTabUnselected(tab: TabLayout.Tab?) { // Не используется
+            override fun onTabUnselected(tab: TabLayout.Tab?) { // Not used
             }
-            override fun onTabReselected(tab: TabLayout.Tab?) { // Не используется
+            override fun onTabReselected(tab: TabLayout.Tab?) { // Not used
             }
         })
 
         return view
+    }
+
+    override fun onTradeClick() {
+        val applyFragment = ApplyFragment()
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, applyFragment)
+            addToBackStack(null)
+            commit()
+        }
     }
 
     companion object {

@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import m.ermolaev.autotradeapp.R
 
-class StockListAdapter(private val dataList: List<StockData>) : RecyclerView.Adapter<StockListAdapter.MyViewHolder>() {
+interface OnTradeClickListener {
+    fun onTradeClick()
+}
+class StockListAdapter(private val dataList: List<StockData>, private val listener: OnTradeClickListener) : RecyclerView.Adapter<StockListAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textTitle: TextView = itemView.findViewById(R.id.textTitle)
@@ -29,7 +32,7 @@ class StockListAdapter(private val dataList: List<StockData>) : RecyclerView.Ada
         holder.textDescription.text = currentItem.description
         holder.textPrice.text = currentItem.price
         holder.buttonTrade.setOnClickListener {
-            // Действие по нажатию на кнопку "Use"
+            listener.onTradeClick()
         }
     }
 
