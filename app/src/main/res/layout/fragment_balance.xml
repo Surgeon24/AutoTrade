@@ -188,20 +188,17 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/icon1" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Active strategies: "
-                android:textSize="16sp" />
+                android:textSize="24sp" />
             <TextView
+                android:id="@+id/active"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="null"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -210,20 +207,17 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/icon2" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Accepted strategies: "
-                android:textSize="16sp" />
+                android:textSize="24sp" />
             <TextView
+                android:id="@+id/accepted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="null"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -232,20 +226,17 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/icon3" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Own strategies: "
-                android:textSize="16sp" />
+                android:textSize="24sp" />
             <TextView
+                android:id="@+id/own"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="null"
-                android:textSize="16sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -258,13 +249,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="status: Offline "
-                android:textSize="16sp" />
-            <ImageView
+                android:text="status: "
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="offline" />
-<!--            android:src="@drawable/offline_icon"-->
+                android:text="Offline"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/image_status"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/offline" />
         </LinearLayout>
     </LinearLayout>
 

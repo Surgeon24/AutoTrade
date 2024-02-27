@@ -32,13 +32,12 @@ class StrategyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_strategy, container, false)
-
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
+
         val dataList = ArrayList<StrategyData>()
         dataList.add(StrategyData("Strategy 1", "Description of the strategy 1"))
         dataList.add(StrategyData("Strategy 2", "Description of the strategy 2"))
         dataList.add(StrategyData("Strategy 3", "Description of the strategy 3"))
-
 
         val adapter = StrategyListAdapter(dataList)
         recyclerView.adapter = adapter
@@ -61,6 +60,10 @@ class StrategyFragment : Fragment() {
         })
 
         return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(1)?.select()
     }
 
 

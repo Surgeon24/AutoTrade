@@ -30,8 +30,8 @@ class StockFragment : Fragment(), OnTradeClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stock, container, false)
-
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
+
         val dataList = ArrayList<StockData>()
         dataList.add(StockData("Stock 1", "Description of the Stock 1", "120"))
         dataList.add(StockData("Stock 2", "Description of the Stock 2", "240"))
@@ -58,6 +58,11 @@ class StockFragment : Fragment(), OnTradeClickListener {
         })
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(2)?.select()
     }
 
     override fun onTradeClick() {

@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.android.material.tabs.TabLayout
 import m.ermolaev.autotradeapp.R
 
@@ -29,6 +31,8 @@ class BalanceFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_balance, container, false)
 
+        setStrategyData(view)
+
         val tabLayout: TabLayout = view.findViewById(R.id.menu)
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -44,8 +48,12 @@ class BalanceFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) { // Не используется
             }
         })
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(0)?.select()
     }
 
     companion object {
@@ -59,6 +67,24 @@ class BalanceFragment : Fragment() {
             }
     }
 
+    private fun setStrategyData(view: View){
+        val active: TextView = view.findViewById(R.id.active)
+        val accepted: TextView = view.findViewById(R.id.accepted)
+        val own: TextView = view.findViewById(R.id.own)
+        val textStatus: TextView = view.findViewById(R.id.text_status)
+        val imageStatus: ImageView = view.findViewById(R.id.image_status)
+
+        val appStatus = (requireActivity() as ApplicationActivity).getAppData()
+        active.text = appStatus.numberActiveStrategies.toString()
+        accepted.text = appStatus.numberAcceptedStrategies.toString()
+        own.text = appStatus.numberOwnStrategies.toString()
+        textStatus.text = appStatus.status
+        if (textStatus.text.equals("Online")) {
+            imageStatus.setImageResource(R.drawable.online)
+        } else {
+            imageStatus.setImageResource(R.drawable.offline)
+        }
+    }
     private fun onBalanceButtonClicked() {
     }
     private fun onStrategyButtonClicked() {
@@ -71,9 +97,10 @@ class BalanceFragment : Fragment() {
     }
 
     private fun onStockButtonClicked() {
-        val strategyFragment = StrategyFragment()
+        println("onStockButtonClicked")
+        val stockFragment = StockFragment()
         requireActivity().supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, strategyFragment)
+            replace(R.id.container, stockFragment)
 //            addToBackStack(null)
             commit()
         }

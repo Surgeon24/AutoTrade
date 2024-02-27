@@ -6,8 +6,34 @@ import androidx.appcompat.app.ActionBar
 import m.ermolaev.autotradeapp.R
 import m.ermolaev.autotradeapp.SocketManager
 
+data class AppData(
+    var status: String = "Offline",
+    var numberActiveStrategies: Int = 0,
+    var numberAcceptedStrategies: Int = 0,
+    var numberOwnStrategies: Int = 0
+)
+
 class ApplicationActivity : AppCompatActivity() {
     private val socketManager = SocketManager()
+    private var appData = AppData()
+
+    // Method to retrieve the status
+    fun getAppData(): AppData {
+        return appData
+    }
+    fun setAppDataStatus(s: String){
+        appData.status = s
+    }
+    fun setAppDataActive(n: Int){
+        appData.numberActiveStrategies = n
+    }
+    fun setAppDataAccepted(n: Int){
+        appData.numberAcceptedStrategies = n
+    }
+    fun setAppDataOwn(n: Int){
+        appData.numberOwnStrategies = n
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_application)

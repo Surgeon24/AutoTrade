@@ -37,6 +37,10 @@ class ApplyFragment : Fragment() {
             editText.text.clear()
             editNumber.text.clear()
 
+            val appData = (requireActivity() as ApplicationActivity).getAppData()
+            (requireActivity() as ApplicationActivity).setAppDataStatus("Online")
+            (requireActivity() as ApplicationActivity).setAppDataActive(appData.numberActiveStrategies + 1)
+            (requireActivity() as ApplicationActivity).setAppDataAccepted(appData.numberAcceptedStrategies + 1)
             Toast.makeText(requireContext(), "Strategy was applied", Toast.LENGTH_SHORT).show()
             requireActivity().supportFragmentManager.popBackStack()
         }
