@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import m.ermolaev.autotradeapp.R
 
 interface OnTradeClickListener {
-    fun onTradeClick()
+    fun onTradeClick(ticker: String)
 }
 class StockListAdapter(private val dataList: List<StockData>, private val listener: OnTradeClickListener) : RecyclerView.Adapter<StockListAdapter.MyViewHolder>() {
 
@@ -28,16 +28,16 @@ class StockListAdapter(private val dataList: List<StockData>, private val listen
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = dataList[position]
 
-        holder.textTitle.text = currentItem.title
+        holder.textTitle.text = currentItem.name
         holder.textDescription.text = currentItem.description
         holder.textPrice.text = currentItem.price
         holder.buttonTrade.setOnClickListener {
-            listener.onTradeClick()
+            listener.onTradeClick(currentItem.ticker)
         }
     }
 
     override fun getItemCount() = dataList.size
 }
 
-class StockData(val title: String, val description: String, val price: String)
+class StockData(val name: String, val ticker: String, val description: String, val price: String)
 

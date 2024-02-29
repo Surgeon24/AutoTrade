@@ -33,9 +33,9 @@ class StockFragment : Fragment(), OnTradeClickListener {
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
 
         val dataList = ArrayList<StockData>()
-        dataList.add(StockData("Stock 1", "Description of the Stock 1", "120"))
-        dataList.add(StockData("Stock 2", "Description of the Stock 2", "240"))
-        dataList.add(StockData("Stock 3", "Description of the Stock 3", "90"))
+        dataList.add(StockData("Apple Inc", "AAPL","designs, manufactures and markets smartphones", "180"))
+        dataList.add(StockData("NVIDIA Corp.", "NVDA", "Key innovator of computer graphics and AI technology", "776"))
+        dataList.add(StockData("Stock 3","TKT", "Description of the Stock 3", "90"))
 
         val adapter = StockListAdapter(dataList, this)
         recyclerView.adapter = adapter
@@ -65,8 +65,11 @@ class StockFragment : Fragment(), OnTradeClickListener {
         (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(2)?.select()
     }
 
-    override fun onTradeClick() {
+    override fun onTradeClick(ticker: String) {
         val applyFragment = ApplyFragment()
+        val bundle = Bundle()
+        bundle.putString("ticker", ticker)
+        applyFragment.arguments = bundle
         requireActivity().supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, applyFragment)
             addToBackStack(null)
