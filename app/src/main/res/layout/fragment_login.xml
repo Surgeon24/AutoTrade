@@ -109,6 +109,20 @@
         />
 
     <TextView
+        android:id="@+id/clickable_pincode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:text="login by pincode"
+        android:textColorLink="#757575"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/clickable_passwordRecovery"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        />
+
+    <TextView
         android:id="@+id/clickable_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

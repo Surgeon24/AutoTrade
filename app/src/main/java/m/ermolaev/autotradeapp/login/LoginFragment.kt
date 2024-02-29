@@ -10,23 +10,9 @@ import android.widget.Button
 import android.widget.TextView
 import m.ermolaev.autotradeapp.R
 import m.ermolaev.autotradeapp.application.ApplicationActivity
-import m.ermolaev.autotradeapp.application.BalanceFragment
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import m.ermolaev.autotradeapp.login.pincode.CreatePinFragment
 
 class LoginFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,30 +23,29 @@ class LoginFragment : Fragment() {
         val passwordRecoveryTextView: TextView = view.findViewById(R.id.clickable_passwordRecovery)
         val registrationTextView: TextView = view.findViewById(R.id.clickable_signUp)
         val loginButton: Button = view.findViewById(R.id.login)
+        val pincodeTextView: TextView = view.findViewById(R.id.clickable_pincode)
 
         // Set click listener
         passwordRecoveryTextView.setOnClickListener { onForgotPasswordClicked() }
         registrationTextView.setOnClickListener { onRegistrationClicked() }
         loginButton.setOnClickListener { onLoginClicked() }
+        pincodeTextView.setOnClickListener { onLoginByPincodeClicked() }
 
         return view
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
     private fun onForgotPasswordClicked() {
         val passwordRecoveryFragment = PasswordRecoveryFragment()
         requireActivity().supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, passwordRecoveryFragment)
+            addToBackStack(null)
+            commit()
+        }
+    }
+
+    private fun onLoginByPincodeClicked() {
+        val pincodeFragment = CreatePinFragment()
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, pincodeFragment)
             addToBackStack(null)
             commit()
         }
