@@ -11,16 +11,15 @@ import androidx.lifecycle.Observer
 import m.ermolaev.autotradeapp.R
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.redmadrobot.pinkman_ui.PinKeyboard
 import com.redmadrobot.pinkman_ui.PinView
 import m.ermolaev.autotradeapp.login.LoginActivity
 import m.ermolaev.autotradeapp.login.LoginFragment
 
 class CreatePinFragment : Fragment() {
 
-//    private val viewModel: LoginActivity.CreatePinViewModel by viewModels()
     private val viewModel: LoginActivity.CreatePinViewModel by viewModels {
-        //TODO: fix the error in this viewModel
-        CreatePinViewModelFactory((requireActivity().application as LoginActivity).pinkman)
+        CreatePinViewModelFactory((activity as LoginActivity).pinkman)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +40,9 @@ class CreatePinFragment : Fragment() {
         })
 
         val pinView = view.findViewById<PinView>(R.id.pin_view)
-        val keyboard = view.findViewById<KeyboardView>(R.id.keyboard)
+        val keyboard = view.findViewById<PinKeyboard>(R.id.keyboard)
         pinView.onFilledListener = { viewModel.createPin("1234") }
-//        keyboard.keyboardClickListener = { pinView.add('1') }
+        keyboard.keyboardClickListener = { pinView.add('1') }
     }
 
     private fun onLoginClicked() {

@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
 
     private fun onLoginByPincodeClicked() {
         val pincodeFragment = CreatePinFragment()
-        requireActivity().supportFragmentManager.beginTransaction().apply {
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
             replace(R.id.container, pincodeFragment)
             addToBackStack(null)
             commit()
