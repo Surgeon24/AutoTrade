@@ -12,17 +12,9 @@ import android.widget.EditText
 import android.widget.Toast
 import kotlinx.coroutines.channels.ticker
 import m.ermolaev.autotradeapp.socket.SendMessage
+import org.json.JSONArray
+import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ApplyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ApplyFragment() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +29,21 @@ class ApplyFragment() : Fragment() {
         rootView.findViewById<EditText>(R.id.editTextText)?.setText(ticker)
 
         button.setOnClickListener {
-            SendMessage().execute(Pair(editText.text.toString(), editNumber.text.toString().toInt()))
+            val symbol = editText.text.toString()
+            val strategyId = editNumber.text.toString()
+
+            val argumentsArray = JSONArray()
+            argumentsArray.put(symbol)
+            argumentsArray.put(strategyId)
+            val currentThread = (requireActivity() as ApplicationActivity).getCurrentThread()
+            argumentsArray.put(currentThread)
+            val pairJson = JSONObject()
+            pairJson.put("method", "startStrategy")
+            pairJson.put("arguments",argumentsArray)
+
+            SendMessage().execute(pairJson.toString())
+            (requireActivity() as ApplicationActivity).setCurrentThread(currentThread+1)
+            ApplicationActivity.activeStrategyList.add(Bot(currentThread, symbol, strategyId))
             editText.text.clear()
             editNumber.text.clear()
 

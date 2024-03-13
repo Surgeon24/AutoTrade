@@ -9,22 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.tabs.TabLayout
 import m.ermolaev.autotradeapp.R
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import m.ermolaev.autotradeapp.socket.SendMessage
+import org.json.JSONArray
+import org.json.JSONObject
 
 class BalanceFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +30,7 @@ class BalanceFragment : Fragment() {
                     0 -> onBalanceButtonClicked()
                     1 -> onStrategyButtonClicked()
                     2 -> onStockButtonClicked()
+                    3 -> onBotButtonClicked()
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) { // Не используется
@@ -48,23 +38,21 @@ class BalanceFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) { // Не используется
             }
         })
+
+        print("SEND THE QUESTION")
+
+        val argumentsArray = JSONArray()
+        val pairJson = JSONObject()
+        pairJson.put("method", "askAccountData")
+        pairJson.put("arguments",argumentsArray)
+
+        SendMessage().execute(pairJson.toString())
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(0)?.select()
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BalanceFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     private fun setStrategyData(view: View){
@@ -101,6 +89,16 @@ class BalanceFragment : Fragment() {
         val stockFragment = StockFragment()
         requireActivity().supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, stockFragment)
+//            addToBackStack(null)
+            commit()
+        }
+    }
+
+    private fun onBotButtonClicked() {
+        println("onBotButtonClicked")
+        val botFragment = BotFragment()
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, botFragment)
 //            addToBackStack(null)
             commit()
         }

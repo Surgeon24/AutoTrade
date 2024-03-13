@@ -7,10 +7,10 @@ import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.net.Socket
 
-class SendMessage : AsyncTask<Pair<String, Int>, Void, Void>() {
+class SendMessage : AsyncTask<String, Void, Void>() {
     private var exception: Exception? = null
 
-    override fun doInBackground(vararg params: Pair<String, Int>): Void? {
+    override fun doInBackground(vararg params: String): Void? {
         try {
             try {
                 val socket = Socket("192.168.56.1", 8888)
@@ -20,10 +20,7 @@ class SendMessage : AsyncTask<Pair<String, Int>, Void, Void>() {
                     )
                 )
                 // Serialize the pair to JSON before sending
-                val pairJson = JSONObject()
-                pairJson.put(params[0].first, "string")
-                pairJson.put(params[0].second.toString(), "integer")
-                outToServer.println(pairJson.toString())
+                outToServer.println(params[0])
                 outToServer.flush()
                 socket.close() // Close the socket after sending
             } catch (e: IOException) {

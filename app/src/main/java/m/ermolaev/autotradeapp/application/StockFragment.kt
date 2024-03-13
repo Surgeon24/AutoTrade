@@ -49,6 +49,7 @@ class StockFragment : Fragment(), OnTradeClickListener {
                     0 -> onBalanceButtonClicked()
                     1 -> onStrategyButtonClicked()
                     2 -> onStockButtonClicked()
+                    3 -> onBotButtonClicked()
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) { // Not used
@@ -105,5 +106,13 @@ class StockFragment : Fragment(), OnTradeClickListener {
         }
     }
     private fun onStockButtonClicked() {
+    }
+    private fun onBotButtonClicked() {
+        val botFragment = BotFragment()
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, botFragment)
+//            addToBackStack(null)
+            commit()
+        }
     }
 }

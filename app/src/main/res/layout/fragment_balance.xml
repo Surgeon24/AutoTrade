@@ -39,6 +39,14 @@
             android:icon="@drawable/bank"
             />
 
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/bot_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bots"
+            android:icon="@drawable/robot"
+            />
+
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.button.MaterialButtonToggleGroup

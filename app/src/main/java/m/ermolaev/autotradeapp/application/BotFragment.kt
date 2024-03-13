@@ -1,29 +1,29 @@
 package m.ermolaev.autotradeapp.application
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import m.ermolaev.autotradeapp.R
 
-class StrategyFragment : Fragment() {
+class BotFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_strategy, container, false)
+        val view = inflater.inflate(R.layout.fragment_bot, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
 
-        val strategiesList = ArrayList<StrategyData>()
-        strategiesList.add(StrategyData("Strategy 1", "Description of the strategy 1"))
-        strategiesList.add(StrategyData("Strategy 2", "Description of the strategy 2"))
-        strategiesList.add(StrategyData("Strategy 3", "Description of the strategy 3"))
+        val strategiesList = ArrayList<Bot>()
+        for (s in ApplicationActivity.activeStrategyList)
+            strategiesList.add(s)
 
-        val adapter = StrategyListAdapter(strategiesList)
+        val adapter = BotListAdapter(strategiesList, ApplicationActivity())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -48,7 +48,7 @@ class StrategyFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(1)?.select()
+        (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(3)?.select()
     }
 
 
@@ -61,6 +61,12 @@ class StrategyFragment : Fragment() {
         }
     }
     private fun onStrategyButtonClicked() {
+        val strategyFragment = StrategyFragment()
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, strategyFragment)
+//            addToBackStack(null)
+            commit()
+        }
     }
     private fun onStockButtonClicked() {
         val stockFragment = StockFragment()
@@ -71,11 +77,6 @@ class StrategyFragment : Fragment() {
         }
     }
     private fun onBotButtonClicked() {
-        val botFragment = BotFragment()
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, botFragment)
-//            addToBackStack(null)
-            commit()
-        }
+
     }
 }

@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import m.ermolaev.autotradeapp.R
 
-class StrategyListAdapter(private val dataList: List<StrategyData>) : RecyclerView.Adapter<StrategyListAdapter.MyViewHolder>() {
+class StrategyListAdapter(private val dataList: ArrayList<StrategyData>) : RecyclerView.Adapter<StrategyListAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textTitle: TextView = itemView.findViewById(R.id.textTitle)
