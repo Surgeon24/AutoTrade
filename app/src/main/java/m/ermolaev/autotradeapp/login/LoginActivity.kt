@@ -16,8 +16,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         pinkman = Pinkman(application.applicationContext)
-        val serverUri = URI("http://127.0.0.1:12345")
-        webSocketManager = WebSocketManager(serverUri)
+        webSocketManager = WebSocketManager()
         webSocketManager?.connect()
 
         loadLoginFragment()
@@ -53,6 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        webSocketManager?.close()
+        webSocketManager?.disconnect()
     }
 }

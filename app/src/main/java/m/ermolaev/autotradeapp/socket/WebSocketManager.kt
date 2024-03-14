@@ -1,28 +1,38 @@
 package m.ermolaev.autotradeapp.socket
 
-import org.java_websocket.client.WebSocketClient
-import org.java_websocket.handshake.ServerHandshake
-import java.net.URI
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 
-class WebSocketManager(serverUri: URI) : WebSocketClient(serverUri) {
+class WebSocketManager : WebSocketListener() {
+    private var webSocket: WebSocket? = null
+    private var exception: Exception? = null
 
-    override fun onOpen(handshakedata: ServerHandshake?) {
-        println("WebSocket connection opened")
-        // Можно сделать что-то при успешном открытии соединения
+    fun connect() {
+        val client = OkHttpClient()
+        val request = Request.Builder().url("ws://192.168.56.1:8888").build()
+        webSocket = client.newWebSocket(request, this)
     }
 
-    override fun onClose(code: Int, reason: String?, remote: Boolean) {
-        println("WebSocket connection closed")
-        // Можно сделать что-то при закрытии соединения
+    override fun onOpen(webSocket: WebSocket, response: okhttp3.Response) {
+        // WebSocket соединение установлено
     }
 
-    override fun onMessage(message: String?) {
-        println("Received message: $message")
-        // Обработка полученного сообщения
+    override fun onFailure(webSocket: WebSocket, t: Throwable, response: okhttp3.Response?) {
+        // Произошла ошибка при установке WebSocket соединения
+        exception = Exception("WebSocket connection failed", t)
     }
 
-    override fun onError(ex: Exception?) {
-        println("Error: ${ex?.message}")
-        // Обработка ошибки
+    override fun onMessage(webSocket: WebSocket, text: String) {
+        // Получено сообщение от сервера
+    }
+
+    fun sendMessage(message: String) {
+        webSocket?.send(message)
+    }
+
+    fun disconnect() {
+        webSocket?.cancel()
     }
 }
