@@ -10,9 +10,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import kotlinx.coroutines.channels.ticker
-import m.ermolaev.autotradeapp.socket.SendMessage
-import org.json.JSONArray
+import m.ermolaev.autotradeapp.socket.WebSocketManagerSingleton
 import org.json.JSONObject
 
 class ApplyFragment() : Fragment() {
@@ -32,16 +30,13 @@ class ApplyFragment() : Fragment() {
             val symbol = editText.text.toString()
             val strategyId = editNumber.text.toString()
 
-            val argumentsArray = JSONArray()
-            argumentsArray.put(symbol)
-            argumentsArray.put(strategyId)
             val currentThread = (requireActivity() as ApplicationActivity).getCurrentThread()
-            argumentsArray.put(currentThread)
             val pairJson = JSONObject()
-            pairJson.put("method", "startStrategy")
-            pairJson.put("arguments",argumentsArray)
+            pairJson.put("method", "startBot")
+            pairJson.put("strategy_id", strategyId)
+            pairJson.put("stock_id", symbol)
 
-            SendMessage().execute(pairJson.toString())
+            WebSocketManagerSingleton.webSocketManager.sendMessage(pairJson.toString())
             (requireActivity() as ApplicationActivity).setCurrentThread(currentThread+1)
             ApplicationActivity.activeStrategyList.add(Bot(currentThread, symbol, strategyId))
             editText.text.clear()

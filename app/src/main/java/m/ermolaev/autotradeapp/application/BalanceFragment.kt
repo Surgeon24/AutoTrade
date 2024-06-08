@@ -10,16 +10,19 @@ import android.widget.TextView
 import com.google.android.material.tabs.TabLayout
 import m.ermolaev.autotradeapp.R
 import m.ermolaev.autotradeapp.socket.SendMessage
+import m.ermolaev.autotradeapp.socket.WebSocketManager
+import m.ermolaev.autotradeapp.socket.WebSocketManagerSingleton
 import org.json.JSONArray
 import org.json.JSONObject
 
 class BalanceFragment : Fragment() {
+    private lateinit var webSocketManager: WebSocketManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_balance, container, false)
-
+        webSocketManager = WebSocketManagerSingleton.webSocketManager
         setStrategyData(view)
 
         val tabLayout: TabLayout = view.findViewById(R.id.menu)

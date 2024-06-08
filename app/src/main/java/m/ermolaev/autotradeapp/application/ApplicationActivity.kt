@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import m.ermolaev.autotradeapp.R
-import m.ermolaev.autotradeapp.SocketManager
-import m.ermolaev.autotradeapp.socket.WebSocketManager
+import m.ermolaev.autotradeapp.socket.WebSocketManagerSingleton
 
 data class Bot(
     val id: Int,
@@ -21,8 +20,6 @@ data class AppData(
 )
 
 class ApplicationActivity : AppCompatActivity() {
-    private val socketManager = SocketManager()
-    private val webSocketManager = WebSocketManager()
     private var appData = AppData()
 
     companion object {
@@ -68,8 +65,7 @@ class ApplicationActivity : AppCompatActivity() {
         actionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         actionBar?.setCustomView(R.layout.action_bar)
 
-        socketManager.connect()
-        webSocketManager.connect()
+        WebSocketManagerSingleton.webSocketManager.connect()
 
 
         loadBalanceFragment()
@@ -85,7 +81,6 @@ class ApplicationActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        socketManager.disconnect()
-        webSocketManager.disconnect()
+        WebSocketManagerSingleton.webSocketManager.disconnect()
     }
 }
