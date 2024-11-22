@@ -13,7 +13,8 @@ class SendMessage : AsyncTask<String, Void, Void>() {
     override fun doInBackground(vararg params: String): Void? {
         try {
             try {
-                val socket = Socket("192.168.56.1", 8888)
+//                val socket = Socket("127.0.0.1", 8888)
+                val socket = Socket("192.168.31.250", 8888)
                 val outToServer = PrintWriter(
                     OutputStreamWriter(
                         socket.getOutputStream()

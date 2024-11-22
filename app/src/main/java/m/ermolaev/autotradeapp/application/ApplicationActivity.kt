@@ -2,6 +2,7 @@ package m.ermolaev.autotradeapp.application
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBar
 import m.ermolaev.autotradeapp.R
 import m.ermolaev.autotradeapp.socket.WebSocketManagerSingleton
@@ -64,7 +65,7 @@ class ApplicationActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         actionBar?.setCustomView(R.layout.action_bar)
-
+        Log.d("CONNECT", "trying to connect to the server");
         WebSocketManagerSingleton.webSocketManager.connect()
 
 

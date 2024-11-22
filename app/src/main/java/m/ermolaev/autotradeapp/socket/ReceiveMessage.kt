@@ -13,7 +13,8 @@ class ReceiveMessage : AsyncTask<Void, Void, String>() {
     override fun doInBackground(vararg params: Void): String? {
         var receivedData: String? = null
         try {
-            val socket = Socket("192.168.56.1", 8888)
+            val socket = Socket("192.168.31.250", 8888)
+//            val socket = Socket("127.0.0.1", 8888)
             val reader = BufferedReader(InputStreamReader(socket.getInputStream()))
             receivedData = reader.readLine() // Read the JSON string from the server
             socket.close() // Close the socket after receiving data
