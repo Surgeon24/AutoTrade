@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
@@ -16,6 +17,8 @@ private const val ARG_PARAM2 = "param2"
 class StockFragment : Fragment(), OnTradeClickListener {
     private var param1: String? = null
     private var param2: String? = null
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val stocksList = ArrayList<StockData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +34,7 @@ class StockFragment : Fragment(), OnTradeClickListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stock, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-
-        val dataList = ArrayList<StockData>()
-        dataList.add(StockData("Apple Inc", "AAPL","designs, manufactures and markets smartphones", "180"))
-        dataList.add(StockData("NVIDIA Corp.", "NVDA", "Key innovator of computer graphics and AI technology", "776"))
-        dataList.add(StockData("Stock 3","TKT", "Description of the Stock 3", "90"))
-
-        val adapter = StockListAdapter(dataList, this)
+        val adapter = StockListAdapter(stocksList, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -64,6 +61,12 @@ class StockFragment : Fragment(), OnTradeClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(2)?.select()
+
+        sharedViewModel.stocks.observe(viewLifecycleOwner) { stocks ->
+            stocks.forEach { stock ->
+                stocksList.add(StockData(stock.name, stock.ticker, stock.description, ""))
+            }
+        }
     }
 
     override fun onTradeClick(ticker: String) {

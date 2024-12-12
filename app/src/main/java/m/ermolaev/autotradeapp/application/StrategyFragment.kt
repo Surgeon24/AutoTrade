@@ -5,24 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import m.ermolaev.autotradeapp.R
 
 class StrategyFragment : Fragment() {
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val strategiesList = ArrayList<StrategyData>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_strategy, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-
-        val strategiesList = ArrayList<StrategyData>()
-        strategiesList.add(StrategyData("Strategy 1", "Description of the strategy 1"))
-        strategiesList.add(StrategyData("Strategy 2", "Description of the strategy 2"))
-        strategiesList.add(StrategyData("Strategy 3", "Description of the strategy 3"))
-
         val adapter = StrategyListAdapter(strategiesList)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -49,6 +46,12 @@ class StrategyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireView().findViewById<TabLayout>(R.id.menu)).getTabAt(1)?.select()
+
+        sharedViewModel.strategies.observe(viewLifecycleOwner) { strategies ->
+            strategies.forEach { strategy ->
+                strategiesList.add(StrategyData(strategy.name, strategy.description))
+            }
+        }
     }
 
 

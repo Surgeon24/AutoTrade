@@ -36,9 +36,9 @@ class BalanceFragment : Fragment() {
                     3 -> onBotButtonClicked()
                 }
             }
-            override fun onTabUnselected(tab: TabLayout.Tab?) { // Не используется
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
-            override fun onTabReselected(tab: TabLayout.Tab?) { // Не используется
+            override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
 
